@@ -8,12 +8,14 @@ import org.testng.annotations.*;
 
 public class TC01 {
     SHAFT.GUI.WebDriver driver ;
+    SHAFT.TestData.JSON tData ;
 
 
     @BeforeClass
     public void setUp()
     {
         driver = new SHAFT.GUI.WebDriver();
+        tData= new SHAFT.TestData.JSON(SHAFT.Properties.paths.testData()+"searchTexts.json");
         driver.browser().navigateToURL("https://www.google.com/ncr");
 
     }
@@ -22,7 +24,7 @@ public class TC01 {
     public void searchForMarsaAlamWeather()
     {
         new P01(driver)
-                .enterTextSearch("Marsa Alam weather")
+                .enterTextSearch(tData.getTestData("FirstSearchWord"))
                 .selectOption();
 
 
@@ -34,7 +36,7 @@ public class TC01 {
     public void searchForrestaurantNearMarsaAlam()
     {
         new P01(driver)
-                .enterTextSearch("restaurant near Marsa Alam");
+                .enterTextSearch(tData.getTestData("secondSearchWord"));
 
         new P02(driver)
                 .selectSearchOption()
